@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: awspvc
+  # annotations:
+  #   volume.beta.kubernetes.io/storage-class: scaws
+  labels:
+    type: amazonEBS
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+   requests:
+     storage: 3Gi
