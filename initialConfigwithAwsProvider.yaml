@@ -1,0 +1,29 @@
+apiVersion: kubeadm.k8s.io/v1beta1
+kind: ClusterConfiguration
+kubernetesVersion: stable
+controlPlaneEndpoint: "10.0.0.240:6443"
+apiServer:
+  extraArgs:
+    cloud-provider: aws
+  certSANs:
+   - k8s-api.example.com
+   - <EIP>
+   - 10.0.0.240
+   clusterName: k8s
+controllerManager:
+  extraArgs:
+    cloud-provider: aws
+networking:
+  podSubnet: 10.244.0.0/16
+---
+apiVersion: kubeadm.k8s.io/v1beta1
+kind: InitConfiguration
+nodeRegistration:
+  kubeletExtraArgs:
+    cloud-provider: aws
+    
+    
+============================
+  mkdir -p /home/k8s/.kube
+  sudo cp -i /etc/kubernetes/admin.conf /home/k8s/.kube/config
+  sudo chown k8s:k8s /home/k8s/.kube/config   
